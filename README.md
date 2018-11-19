@@ -53,3 +53,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - https://github.com/aofdev/vue-firebase-auth-vuex
 - https://medium.com/@MichalBujalski/reactive-firebase-auth-with-vue-92577ab78ff6
 - https://vuejsdevelopers.com/2017/10/16/vue-js-firestore/
+- https://medium.com/js-dojo/build-a-realtime-chat-app-with-vuejs-vuex-and-firestore-32d081668709
