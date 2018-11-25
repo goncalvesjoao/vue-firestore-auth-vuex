@@ -32,7 +32,7 @@ export default {
       const promise = getCollection(rootState).doc(uid).set(data)
 
       promise
-        .then(user => commit('set', transformData(user)))
+        .then(user => commit('set', { id: uid, ...data }))
         .finally(() => commit('setLoading', false))
 
       return promise
