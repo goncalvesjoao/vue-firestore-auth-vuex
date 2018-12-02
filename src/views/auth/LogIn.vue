@@ -55,10 +55,14 @@
                     </v-card>
                   </v-hover>
 
-                  <v-layout justify-space-between class="mt-3">
-                    <v-btn flat :to="{ name: 'auth.sign_up' }" color="grey darken-1">Need an account?</v-btn>
+                  <v-layout row wrap class="mt-3">
+                    <v-flex xs12 sm6 class="pa-0">
+                      <v-btn class="mt-1 mb-0 ml-2 mr-0" flat :to="{ name: 'auth.sign_up' }" color="grey darken-1">Need an account?</v-btn>
+                    </v-flex>
 
-                    <v-btn flat :to="{ name: 'auth.recover_password' }" color="grey darken-1">Forgot your password?</v-btn>
+                    <v-flex xs12 sm6 class="pa-0 text-xs-left text-sm-right">
+                      <v-btn class="mt-1 mb-0 ml-2 mr-0" flat :to="{ name: 'auth.recover_password' }" color="grey darken-1">Forgot your password?</v-btn>
+                    </v-flex>
                   </v-layout>
                 </v-flex>
               </v-layout>

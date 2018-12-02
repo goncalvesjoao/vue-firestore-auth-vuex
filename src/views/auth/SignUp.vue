@@ -71,8 +71,10 @@
                     </v-card>
                   </v-hover>
 
-                  <v-layout justify-space-between class="mt-3">
-                    <v-btn flat :to="{ name: 'auth.log_in' }" color="grey darken-1">Already have an account?</v-btn>
+                  <v-layout row wrap class="mt-3">
+                    <v-flex xs12 sm6 class="pa-0">
+                      <v-btn class="mt-1 mb-0 ml-2 mr-0" flat :to="{ name: 'auth.log_in' }" color="grey darken-1">Already have an account?</v-btn>
+                    </v-flex>
                   </v-layout>
                 </v-flex>
               </v-layout>
