@@ -5,9 +5,6 @@ import router from './router'
 import { auth } from '@/api/firebase'
 import Application from './views/layouts/Application.vue'
 
-import 'roboto-fontface/css/roboto/roboto-fontface.css'
-import '@fortawesome/fontawesome-free/css/all.css'
-
 Vue.config.productionTip = false
 
 let vue = null

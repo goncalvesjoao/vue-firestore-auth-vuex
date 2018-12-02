@@ -1,37 +1,31 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout justify-center>
-      <v-flex xs12 sm8 md4>
-        <v-card>
-          <v-toolbar dark color="primary">
-            <v-toolbar-title>User Profiles</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-progress-circular v-if="loading" :indeterminate="loading" class="right"/>
-          </v-toolbar>
+  <v-container fluid text-xs-center>
+    <PageTitle title="User Profiles" :loading="loading" @onRefresh="getAll" />
 
-          <v-list two-line>
-            <template v-for="(userProfile, index) in all">
-              <v-list-tile :key="index" avatar>
-                <v-list-tile-avatar>
-                  <img v-if="userProfile.photoUrl" :src="userProfile.photoUrl">
-                  <v-icon v-else>fa-user</v-icon>
-                </v-list-tile-avatar>
+    <v-list two-line>
+      <template v-for="(userProfile, index) in all">
+        <v-list-tile :key="index" avatar>
+          <v-list-tile-avatar>
+            <img v-if="userProfile.photoUrl" :src="userProfile.photoUrl">
 
-                <v-list-tile-content>
-                  <v-list-tile-title v-html="userProfile.firstName || '-'" />
-                  <v-list-tile-sub-title v-html="userProfile.email" />
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-          </v-list>
-        </v-card>
-      </v-flex>
-    </v-layout>
+            <v-btn v-else icon disabled color="grey lighten-2">
+              <v-icon color="grey darken-1">person</v-icon>
+            </v-btn>
+          </v-list-tile-avatar>
+
+          <v-list-tile-content>
+            <v-list-tile-title v-html="userProfile.firstName || '-'" />
+            <v-list-tile-sub-title v-html="userProfile.email" />
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
   </v-container>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import PageTitle from '@/components/PageTitle'
 
 export default {
   name: 'List',
@@ -46,7 +40,14 @@ export default {
     }
   },
   created () { this.getAll() },
-  methods: mapActions('userProfiles', ['getAll']),
-  computed: mapGetters('userProfiles', ['all', 'loading'])
+  methods: {
+    getAll () {
+      this.$store.dispatch('userProfiles/getAll')
+    }
+  },
+  computed: mapGetters('userProfiles', ['all', 'loading']),
+  components: {
+    PageTitle
+  }
 }
 </script>

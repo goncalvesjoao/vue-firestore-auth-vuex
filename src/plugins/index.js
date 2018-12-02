@@ -1,3 +1,5 @@
 import './vuex'
+import './config'
 import './vuetify'
+import './truncate'
 import './vee-validate'

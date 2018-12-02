@@ -57,7 +57,9 @@ export default {
     resetPasswordWithEmail ({ commit }, { email }) {
       const promise = auth().sendPasswordResetEmail(email)
 
-      promise.then(() => commit('setCurrentUser', null))
+      promise
+        .then(() => commit('setCurrentUser', null))
+        .catch(() => {})
 
       return promise
     },

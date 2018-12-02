@@ -14,7 +14,7 @@
     "@firebase/app": "^0.3.4",
     "@firebase/auth": "^0.7.9",
     "@firebase/firestore": "^0.8.7",
-    "@fortawesome/fontawesome-free": "^5.2.0",
+    "material-design-icons-iconfont": "^4.0.2",
     "roboto-fontface": "*",
     "vee-validate": "^2.1.2",
     "vue": "^2.5.17",
