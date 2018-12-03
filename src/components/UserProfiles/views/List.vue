@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import PageTitle from '@/components/PageTitle'
+import PageTitle from '@/components/shared/PageTitle'
 
 export default {
   name: 'List',

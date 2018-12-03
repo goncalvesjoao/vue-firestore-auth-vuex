@@ -1,21 +1,8 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import store from '@/store'
+import VueRouter from 'vue-router'
 
-import Home from '@/views/home/index.vue'
-import userProfiles from './userProfiles'
-import auth from './auth'
-
-Vue.use(Router)
-
-const router = new Router({
-  mode: 'history',
-  routes: [
-    { path: '/', name: 'home', component: Home },
-    ...userProfiles,
-    ...auth
-  ]
-})
+import store from '../store'
+import router from '../router'
 
 let redirectedPageUrl = null
 
@@ -37,4 +24,4 @@ router.$goToRedirectedPage = () => {
   redirectedPageUrl = null
 }
 
-export default router
+Vue.use(VueRouter)

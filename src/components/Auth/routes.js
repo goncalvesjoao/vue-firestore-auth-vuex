@@ -1,8 +1,8 @@
-import AuthLogIn from '@/views/auth/LogIn.vue'
-import AuthLogOut from '@/views/auth/LogOut.vue'
-import AuthSignUp from '@/views/auth/SignUp.vue'
-import AuthAccount from '@/views/auth/Account.vue'
-import AuthRecoverPassword from '@/views/auth/RecoverPassword.vue'
+import AuthLogIn from './views/LogIn.vue'
+import AuthLogOut from './views/LogOut.vue'
+import AuthSignUp from './views/SignUp.vue'
+import AuthAccount from './views/Account.vue'
+import AuthRecoverPassword from './views/RecoverPassword.vue'
 
 export default [
   {
@@ -15,9 +15,7 @@ export default [
     name: 'auth.log_in',
     component: AuthLogIn,
     meta: {
-      NavBar: {
-        flat: true
-      }
+      flatBanner: true
     }
   },
   {
@@ -25,9 +23,7 @@ export default [
     name: 'auth.sign_up',
     component: AuthSignUp,
     meta: {
-      NavBar: {
-        flat: true
-      }
+      flatBanner: true
     }
   },
   {
@@ -35,9 +31,7 @@ export default [
     name: 'auth.recover_password',
     component: AuthRecoverPassword,
     meta: {
-      NavBar: {
-        flat: true
-      }
+      flatBanner: true
     }
   },
   {

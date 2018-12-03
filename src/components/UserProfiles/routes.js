@@ -1,5 +1,5 @@
-import List from '@/views/userProfiles/List.vue'
-import Show from '@/views/userProfiles/Show.vue'
+import List from './views/List.vue'
+import Show from './views/Show.vue'
 
 export default [
   {

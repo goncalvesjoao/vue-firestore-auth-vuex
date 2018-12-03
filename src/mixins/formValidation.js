@@ -1,6 +1,11 @@
 export default {
+  data () {
+    return {
+      formValid: false
+    }
+  },
   methods: {
-    async validateAll (success = () => {}, error = () => {}) {
+    async runValidations (success = () => {}, error = () => {}) {
       let valid = null
 
       await this.$validator.validateAll().then(result => {

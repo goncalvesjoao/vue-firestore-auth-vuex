@@ -1,13 +1,14 @@
 export default {
   data () {
     return {
-      feedback: { enable: false, type: 'error', message: '' }
+      feedback: { show: false, loading: false, type: 'error', message: '' }
     }
   },
   methods: {
     showFeedback (type, message) {
-      this.feedback.enable = true
+      this.feedback.show = true
       this.feedback.type = type
+      this.feedback.loading = false
       this.feedback.message = message
     }
   }

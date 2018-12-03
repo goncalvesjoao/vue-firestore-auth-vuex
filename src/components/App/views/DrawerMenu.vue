@@ -4,7 +4,7 @@
       <v-list dense>
         <v-list-tile avatar ripple class="pa-0">
           <v-list-tile-avatar>
-            <img v-if="currentUser.photoUrl" src="https://randomuser.me/api/portraits/men/85.jpg">
+            <img v-if="currentUser.photoUrl" :src="currentUser.photoUrl">
 
             <v-btn v-else icon disabled color="grey lighten-2">
               <v-icon color="grey darken-1">person</v-icon>
@@ -73,7 +73,7 @@
 
 <script>
 export default {
-  name: 'LeftDrawer',
+  name: 'DrawerMenu',
   props: ['title', 'show', 'currentUser'],
   data () {
     return {

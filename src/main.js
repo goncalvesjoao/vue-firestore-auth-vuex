@@ -1,9 +1,12 @@
 import Vue from 'vue'
+
+import './filters'
 import './plugins'
+
 import store from './store'
 import router from './router'
 import { auth } from '@/api/firebase'
-import Application from './views/layouts/Application.vue'
+import AppLayout from './components/App/views/Layout.vue'
 
 Vue.config.productionTip = false
 
@@ -13,7 +16,7 @@ auth().onAuthStateChanged(currentUser => {
   vue = vue || new Vue({
     router,
     store,
-    render: h => h(Application)
+    render: h => h(AppLayout)
   }).$mount('#app')
 
   store.dispatch('auth/setCurrentUser', currentUser)

@@ -9,7 +9,7 @@
 
     <v-container>
       <v-layout row>
-        <v-flex xs12 md8 offset-md2>
+        <v-flex xs12 sm8 offset-sm2>
           <v-card flat class="card--flex-toolbar" color="transparent">
             <v-container fluid grid-list-lg>
               <v-layout row wrap>
@@ -22,7 +22,7 @@
                 <v-flex xs12>
                   <v-hover>
                     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                      <v-alert v-model="feedback.enable" dismissible :type="feedback.type">{{feedback.message}}</v-alert>
+                      <v-alert v-model="feedback.show" dismissible :type="feedback.type">{{feedback.message}}</v-alert>
 
                       <v-card-text>
                         <v-form v-model="formValid">
@@ -63,7 +63,7 @@
                         <v-spacer></v-spacer>
                         <v-btn
                           :disabled="!formValid"
-                          :loading="loading"
+                          :loading="feedback.loading"
                           color="primary"
                           @click="submit"
                         >Create</v-btn>
@@ -88,17 +88,15 @@
 
 <script>
 import feedback from '@/mixins/feedback'
-import validateAll from '@/mixins/validateAll'
+import formValidation from '@/mixins/formValidation'
 
 export default {
   name: 'SignUp',
-  mixins: [feedback, validateAll],
+  mixins: [feedback, formValidation],
   data () {
     return {
       email: null,
-      loading: null,
       password: null,
-      formValid: false,
       confirm_password: null
     }
   },
@@ -112,10 +110,10 @@ export default {
   },
   methods: {
     submit () {
-      this.validateAll(this.signUp)
+      this.runValidations(this.signUp)
     },
     signUp () {
-      this.loading = true
+      this.feedback.loading = true
 
       this
         .$store
@@ -124,8 +122,6 @@ export default {
           password: this.password
         })
         .catch(error => {
-          this.loading = false
-
           this.showFeedback('error', error.message)
         })
     },

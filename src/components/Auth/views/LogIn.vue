@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <v-toolbar
       dense
       color="primary"
@@ -9,12 +9,12 @@
 
     <v-container>
       <v-layout row>
-        <v-flex xs12 md8 offset-md2>
+        <v-flex xs12 sm8 offset-sm2>
           <v-card flat class="card--flex-toolbar" color="transparent">
             <v-container fluid grid-list-lg>
               <v-layout row wrap>
                 <v-flex xs12>
-                  <h2 class="white--text">Recover password</h2>
+                  <h2 class="white--text">Log in</h2>
                 </v-flex>
               </v-layout>
 
@@ -22,7 +22,7 @@
                 <v-flex xs12>
                   <v-hover>
                     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`">
-                      <v-alert v-model="feedback.enable" dismissible :type="feedback.type">{{feedback.message}}</v-alert>
+                      <v-alert v-model="feedback.show" dismissible :type="feedback.type">{{feedback.message}}</v-alert>
 
                       <v-card-text>
                         <v-form v-model="formValid">
@@ -34,13 +34,23 @@
                             type="email"
                             v-validate="'required|email'"
                             :error-messages="errors.collect('email')"
-                          />
+                          ></v-text-field>
+
+                          <v-text-field
+                            v-model="password"
+                            append-icon="lock"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            v-validate="'required|min:4'"
+                            :error-messages="errors.collect('password')"
+                          ></v-text-field>
                         </v-form>
                       </v-card-text>
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn :disabled="!formValid" :loading="loading" color="primary" @click="submit">Send instructions</v-btn>
+                        <v-btn :disabled="!formValid" :loading="feedback.loading" color="primary" @click="submit">Enter</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-hover>
@@ -51,7 +61,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6 class="pa-0 text-xs-left text-sm-right">
-                      <v-btn class="mt-1 mb-0 ml-2 mr-0" flat :to="{ name: 'auth.log_in' }" color="grey darken-1">Remembered your password?</v-btn>
+                      <v-btn class="mt-1 mb-0 ml-2 mr-0" flat :to="{ name: 'auth.recover_password' }" color="grey darken-1">Forgot your password?</v-btn>
                     </v-flex>
                   </v-layout>
                 </v-flex>
@@ -66,16 +76,20 @@
 
 <script>
 import feedback from '@/mixins/feedback'
-import validateAll from '@/mixins/validateAll'
+import formValidation from '@/mixins/formValidation'
 
 export default {
-  name: 'RecoverPassword',
-  mixins: [feedback, validateAll],
+  name: 'LogIn',
+  mixins: [feedback, formValidation],
   data () {
     return {
       email: null,
-      loading: null,
-      formValid: false
+      password: null
+    }
+  },
+  watch: {
+    currentUser (newValue, oldValue) {
+      if (newValue) { this.signInSuccess() }
     }
   },
   computed: {
@@ -83,25 +97,22 @@ export default {
   },
   methods: {
     submit () {
-      this.validateAll(this.recoverPassword)
+      this.runValidations(this.signIn)
     },
-    recoverPassword () {
-      this.loading = true
+    signIn () {
+      this.feedback.loading = true
 
       this
         .$store
-        .dispatch('auth/resetPasswordWithEmail', { email: this.email })
-        .then(this.recoverPasswordSuccess)
-        .catch(error => {
-          this.loading = false
-
+        .dispatch('auth/signUserIn', {
+          email: this.email,
+          password: this.password
+        }).catch(error => {
           this.showFeedback('error', error.message)
         })
     },
-    recoverPasswordSuccess () {
-      this.loading = false
-
-      this.showFeedback('success', 'Instructions have been sent to your email.')
+    signInSuccess (_user) {
+      this.$router.$goToRedirectedPage()
     }
   }
 }
